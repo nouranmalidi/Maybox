@@ -6,7 +6,28 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Bonjour dans l'accueil</h1>
+    
+<% if (nomClient) { %>
+  <h2>Ravi de vous revoir, <%= nomClient %> !</h2>
+  <p>Vous pouvez maintenant souscrire à nos offres.</p>
+<% } else { %>
+  <p>Veuillez vous connecter pour souscrire à une box.</p>
+<% } %>
+
+
+<form action="/api/client" method="POST">
+  <input type="text" name="nom" placeholder="Votre nom" required>
+  <input type="email" name="email" placeholder="Votre email" required>
+  <input type="password" name="mot_de_passe" placeholder="Mot de passe" required>
+  <button type="submit">Créer mon compte</button>
+</form>
+
+
+<form action="/api/login" method="POST">
+  <input type="email" name="email" placeholder="Email" required>
+  <input type="password" name="password" placeholder="Mot de passe" required>
+  <button type="submit">Se connecter</button>
+</form>
 
 </body>
 </html>
