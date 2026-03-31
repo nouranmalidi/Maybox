@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MayBox | Notre Équipe</title>
+</head>
+<body>
+    
+    <div class="conteneur-equipe">
+        <% resultatEquipe.forEach(resultat => { %>
+            <div class="card">
+                <img src="/images/avatar1.png" alt="Avatar" style="width:65%">
+                <div class="container">
+                    <h4><b><%= resultat.nom %> <%= resultat.prenom %> <%= resultat.fonction %> <%= resultat.numero_immatriculation %> <%= resultat.telephone %> <%= resultat.email %></b></h4>              
+
+                </div>
+            </div>
+        <% }) %>
+    </div>
+
+</body>
+</html>

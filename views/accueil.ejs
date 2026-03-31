@@ -3,31 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>MayBox | Vos offres Fibre</title>
+    <link rel="stylesheet" href="/style.css">
+    <link href="/css/style.css" rel="stylesheet">
 </head>
 <body>
-    
-<% if (nomClient) { %>
-  <h2>Ravi de vous revoir, <%= nomClient %> !</h2>
-  <p>Vous pouvez maintenant souscrire à nos offres.</p>
-<% } else { %>
-  <p>Veuillez vous connecter pour souscrire à une box.</p>
-<% } %>
 
+    <header>
+        <h1>MayBox</h1>
+        <div class="user-status">
+            <% if (nomClient) { %>
+                <p class="you">👋 Ravi de vous revoir, <strong><%= nomClient %></strong> !</p>
+                <a href="/api/logout" class="btn-logout">Se déconnecter</a>
+            <% } else { %>
+                <p class="you">Bienvenue ! Connectez-vous pour profiter de nos offres.</p>
+            <% } %>
+        </div>
+    </header>
 
-<form action="/api/client" method="POST">
-  <input type="text" name="nom" placeholder="Votre nom" required>
-  <input type="email" name="email" placeholder="Votre email" required>
-  <input type="password" name="mot_de_passe" placeholder="Mot de passe" required>
-  <button type="submit">Créer mon compte</button>
-</form>
+    <main class="container">
+        
+        <% if (!nomClient) { %>
+        <section class="auth-container">
+            <div class="auth-card">
+                <h3>Créer un compte</h3>
+                <form action="/api/client" method="POST">
+                    <input type="text" name="nom" placeholder="Nom complet" required>
+                    <input type="email" name="email" placeholder="Email" required>
+                    <input type="password" name="mot_de_passe" placeholder="Mot de passe" required>
+                    <button type="submit" class="btn-primary">S'inscrire gratuitement</button>
+                </form>
+            </div>
 
+            <div class="auth-card">
+                <h3>Déjà client ?</h3>
+                <form action="/api/login" method="POST">
+                    <input type="email" name="email" placeholder="Email" required>
+                    <input type="password" name="password" placeholder="Mot de passe" required>
+                    <button type="submit" class="btn-secondary">Connexion</button>
+                </form>
+            </div>
+        </section>
+        <% } %>
 
-<form action="/api/login" method="POST">
-  <input type="email" name="email" placeholder="Email" required>
-  <input type="password" name="password" placeholder="Mot de passe" required>
-  <button type="submit">Se connecter</button>
-</form>
+        <section id="offres">
+            <h2 class="section-title">Choisissez votre abonnement</h2>
+            
+            <div class="grid-offres">
+
+                <div class="carte-box">
+                    <img src="/images/starter.png" alt="Box Starter" class="box-img">
+                    <div class="box-content">
+                        <h3>Box Starter</h3>
+                        <p class="price">19.99€ <span>/ mois</span></p>
+                        <p class="desc">L'essentiel de la fibre, sans superflu.</p>
+                        <form action="/api/souscrire" method="POST">
+                            <input type="hidden" name="id_box" value="1">
+                            <button type="submit" class="btn-buy">Souscrire</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="carte-box featured">
+                    <img src="/images/premium.png" alt="Box Premium" class="box-img">
+                    <div class="box-content">
+                        <h3>Box Premium</h3>
+                        <p class="price">29.99€ <span>/ mois</span></p>
+                        <p class="desc">Le meilleur débit avec plus de 200 chaînes TV.</p>
+                        <form action="/api/souscrire" method="POST">
+                            <input type="hidden" name="id_box" value="2">
+                            <button type="submit" class="btn-buy">Souscrire</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="carte-box">
+                    <img src="/images/ultra.png" alt="Box Ultra" class="box-img">
+                    <div class="box-content">
+                        <h3>Box Ultra</h3>
+                        <p class="price">39.99€ <span>/ mois</span></p>
+                        <p class="desc">Vitesse 8Gb/s et services de streaming inclus.</p>
+                        <form action="/api/souscrire" method="POST">
+                            <input type="hidden" name="id_box" value="3">
+                            <button type="submit" class="btn-buy">Souscrire</button>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
 
 </body>
 </html>

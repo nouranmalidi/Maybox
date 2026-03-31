@@ -145,5 +145,52 @@ app.post('/api/login', (req, res) => {
 });
 
 
+app.post('/api/souscrire', (req, res) => {
+  // 1. VÉRIFICATION DE SÉCURITÉ : Le client est-il connecté ?
+  if (!req.session.clientId) {
+    return res.send("Erreur : Vous devez être connecté pour souscrire à une offre.");
+    // Tu pourrais aussi faire : return res.redirect('/api/login');
+  }
+
+  // 2. RÉCUPÉRATION DES DONNÉES
+  const id_client = req.session.clientId; // Vient de la session (créée lors du login)
+  const id_box = req.body.id_box;         // Vient du champ 'hidden' du formulaire
+
+  // 3. REQUÊTE SQL POUR INSÉRER L'ABONNEMENT
+  const sql = "INSERT INTO abonnement (id_client, id_box) VALUES (?, ?)";
+
+  req.getConnection((erreur, connection) => {
+    if (erreur) {
+      console.log("Erreur de connexion BDD : ", erreur);
+      return res.status(500).send("Erreur interne du serveur.");
+    }
+
+    connection.query(sql, [id_client, id_box], (err, resultat) => {
+      if (err) {
+        console.log("Erreur lors de la souscription : ", err);
+        return res.status(500).send("Erreur lors de l'enregistrement de l'abonnement.");
+      }
+
+      console.log(`Le client ID ${id_client} a souscrit à la box ID ${id_box}`);
+      
+      // 4. RÉPONSE AU CLIENT
+      res.send(`Félicitations ${req.session.clientNom} ! Votre souscription est validée pour la box  ${id_box}.`);
+      // En vrai, tu ferais plutôt un res.redirect() vers une page "Mon Compte"
+    });
+  });
+});
+
+
+app.get('/api/logout', (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      console.log("Erreur lors de la déconnexion :", err);
+    }
+    // Une fois déconnecté, on redirige vers l'accueil
+    res.redirect('/api/accueil');
+  });
+});
+
+
 module.exports = app;
 
