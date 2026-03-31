@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MayBox | Contact</title>
+    <link href="/css/style.css" rel="stylesheet">
+</head>
+<body>
+    <%- include('navbar') -%>
+
+    <div class="container">
+  <!-- API route founisseur appellé grâce a l'action form-->
+  <form action="/api/contact" method="post"> <!--l'action c'est la route de l'api et methode c'est post car on modifie-->
+
+    <label for="fname">Nom</label>
+    <input type="text" id="fname" name="firstname" placeholder="Nom">
+
+    <label for="prenom">Prenom</label>
+    <input type="text" id="prenom" name="prenom" placeholder="Prenom">
+
+    <label for="objet">Objet du message</label>
+    <input type="text" id="objet" name="objet" placeholder="Objet du message">
+
+
+    <label for="message">Votre message</label>
+    <textarea id="message" name="message" placeholder="Dites nous en plus" style="height:200px"></textarea>
+
+    <input type="submit" value="Envoyer">
+
+  </form>
+</div>
+
+
+</body>
+</html>

@@ -48,3 +48,16 @@ INSERT INTO equipe (nom, prenom, fonction, numero_immatriculation, telephone, em
 ('Boubacar', 'Abdou', 'Chargée de Communication', '321654987', '0178965432', 'boubacar.abdou@maybox.fr'),
 ('Israf', 'Soilihi', 'Responsable Marketing', '654321987', '0198765432', 'israf.soilihi@maybox.fr'),
 ('Yacine', 'Bouzid', 'Chef de Projet', '789123456', '0167895432', 'yacine.bouzid@maybox.fr');
+
+CREATE TABLE contact (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nom VARCHAR(155) NOT NULL,
+    prenom VARCHAR(155) NOT NULL,
+    objet_du_message VARCHAR(155) NOT NULL,
+    message VARCHAR(255) NOT NULL,
+    date_inscription TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+ALTER TABLE equipe ADD COLUMN photo VARCHAR(255);
+
+UPDATE equipe SET photo = 'Niska.gif' WHERE id = 2;

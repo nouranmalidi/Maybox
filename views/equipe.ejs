@@ -4,20 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MayBox | Notre Équipe</title>
+    <link href="/css/style.css" rel="stylesheet">
 </head>
 <body>
-    
+  <%- include('navbar') -%>  
     <div class="conteneur-equipe">
-        <% resultatEquipe.forEach(resultat => { %>
-            <div class="card">
-                <img src="/images/avatar1.png" alt="Avatar" style="width:65%">
-                <div class="container">
-                    <h4><b><%= resultat.nom %> <%= resultat.prenom %> <%= resultat.fonction %> <%= resultat.numero_immatriculation %> <%= resultat.telephone %> <%= resultat.email %></b></h4>              
-
-                </div>
+    <% resultatEquipe.forEach(resultat => { %>
+        <div class="card">
+            
+            <img src="/images/<%= resultat.photo %>" alt="Photo de <%= resultat.prenom %>" style="width:65%">
+            
+            <div class="container">
+                <h4><b><%= resultat.nom %> <%= resultat.prenom %></b></h4>
+                <p><i><%= resultat.fonction %></i></p>
+                
+                <p class="infos-contact">
+                    Tel: <%= resultat.telephone %> <br>
+                    Email: <%= resultat.email %>
+                </p>
+                <p class="infos-admin">Immat: <%= resultat.numero_immatriculation %></p>
             </div>
-        <% }) %>
-    </div>
+        </div>
+    <% }) %>
+</div>
 
 </body>
 </html>

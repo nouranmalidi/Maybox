@@ -192,5 +192,74 @@ app.get('/api/logout', (req, res) => {
 });
 
 
+
+// API ROUTE pour la page equipe
+app.get('/api/equipe', (req, res) => {
+  console.log("Je passe dans /api/accueil");
+
+
+// 1. Je me connecte à la BDD grâce à la méthode getConnection()
+  req.getConnection((erreur, connection) => {
+    if (erreur) { // Je vérifie si il y'a une erreur lors de la connexion à la BDD
+      console.log(erreur);
+    } else {
+      connection.query("SELECT * FROM equipe", [], (err,resultatEquipe) => {
+        if (err) {
+          console.log("Erreur dans la requête SQL SELECT : ", err);
+        } else {
+          console.log("Mon équipe : ", resultatEquipe);
+
+          // Je retourne au client le résultat de la requête SQL
+          res.render ("equipe", {resultatEquipe});
+        }
+      });
+    }
+  });
+  });
+
+
+// J'accède a la route contact grâce a ce code
+app.get('/api/contact', (req,res) => {
+  res.render("contact");
+});
+
+
+
+
+// J'ajoute un message de contact dans la table contact. Pour cela, j'utilise la méthose POST
+app.post('/api/contact', (req,res) => {
+  console.log("Corps de la requête : ", req.body);
+  const nomContact = req.body.firstname;
+  const prenomContact = req.body.prenom;
+  const objetMessage = req.body.objet;
+  const messageContact = req.body.message;
+
+  const requeteSQL = "INSERT INTO contact (nom, prenom, objet_du_message, message) values (?, ?, ?, ?);";
+
+
+  const ordreChamps = [nomContact,prenomContact,objetMessage,messageContact];
+
+  // Je me connecte à la BDD 
+  req.getConnection((erreur,connection) => {
+    if(erreur) {
+      console.log("Erreur de connection à la BDD : ", erreur);
+    } else { // Si je réussi a me connecter à la BDD
+      connection.query(requeteSQL, ordreChamps, (err, nouveauContact) => {
+        if(err) {
+          console.log("Erreur d'ajout du message: ", err);
+        } else {
+          console.log("Bravo! Nouveau message ajouté.");
+          // Je redirige vers la page d'accueil
+          res.status(302).redirect("/api/accueil");
+        };
+      });
+    };
+
+  });
+});
+
+
+
+
 module.exports = app;
 
