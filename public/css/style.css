@@ -1,6 +1,12 @@
 /* --- 1. CONFIGURATION GÉNÉRALE --- */
-:root {
-    --primary: #0062ff;
+/*
+C'est le cerveau de mon designe, c'est des variables CSS
+Route représente la base de mon document html. J'ai stocké les couleurs et les ombres 
+que j'utilise le plus pour pouvoir les réutiliser facilement et garder une cohérence 
+dans le design
+*/
+:root { 
+    --primary: #0062ff; 
     --secondary: #6c757d;
     --dark: #212529;
     --light: #f8fafc;
@@ -17,38 +23,30 @@ body {
 
 /* --- 2. BARRE DE NAVIGATION (NAVBAR) --- */
 #main {
-    background-color: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
+    background-color: rgba(255, 255, 255, 0.95); /* Fond blanc semi-transparent pour que la 
+    propriété backdrop-filter: blur fonctionne */
+    backdrop-filter: blur(10px);/* floute ce qui se trouve derrière l'élément. */
     height: 70px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
+    display: flex; /* Utilise Flexbox pour aligner les éléments à l'intérieur de la navbar, 
+    sans cette propriété justify-content et align-items ne fonctionnent pas */
+    justify-content: center; /* centre les liens horizontalement */
+    align-items: center; /* centre les liens verticalement */
+    position: sticky; /* Permet à la navbar de rester visible en haut de la page lors du scroll */
+    top: 0; /* C'est l'effet "aimant", reste en haut de la page lors du scroll */
+    z-index: 1000; /* Assure que la navbar reste au-dessus des autres éléments */
     box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
 }
 
 #main a {
-    text-decoration: none;
+    text-decoration: none; /* Supprime le soulignement des liens */
     color: #4a5568;
-    font-weight: 600;
-    margin: 0 20px;
-    transition: color 0.3s;
-    position: relative;
+    font-weight: 600; 
+    margin: 0 20px; /* Espacement horizontal entre les liens */
+    transition: color 0.3s; /* Transition douce pour le changement de couleur */
 }
 
-#main a:hover { color: var(--primary); }
+#main a:hover { color: var(--primary); } /* Effet de soulignement animé au survol des liens */
 
-#main a::after {
-    content: '';
-    position: absolute;
-    width: 0; height: 3px; bottom: -8px; left: 0;
-    background-color: var(--primary);
-    transition: width 0.3s;
-}
-
-#main a:hover::after { width: 100%; }
 
 /* --- 3. HEADER & STATUT --- */
 header {
@@ -60,7 +58,7 @@ header {
 
 .you { font-size: 1.1rem; margin-top: 10px; opacity: 0.9; }
 
-/* --- 4. SECTION OFFRES (MODIFIÉE POUR PETITES IMAGES) --- */
+/* --- 4. SECTION OFFRES --- */
 .container-offers {
     max-width: 1000px;
     margin: 40px auto;
