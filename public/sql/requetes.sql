@@ -60,4 +60,6 @@ CREATE TABLE contact (
 
 ALTER TABLE equipe ADD COLUMN photo VARCHAR(255);
 
-UPDATE equipe SET photo = 'Niska.gif' WHERE id = 2;
+UPDATE equipe SET prenom = 'Pouloulou' WHERE id = 2;
+
+

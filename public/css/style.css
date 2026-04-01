@@ -1,381 +1,181 @@
+/* --- 1. CONFIGURATION GÉNÉRALE --- */
 :root {
-    --primary: #007bff;
+    --primary: #0062ff;
     --secondary: #6c757d;
     --dark: #212529;
-    --light: #f8f9fa;
+    --light: #f8fafc;
     --success: #28a745;
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: #f4f7f6;
+    background-color: #f0f2f5;
     margin: 0;
-    color: var(--dark);
+    color: black;
 }
 
-.container {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 20px;
+/* --- 2. BARRE DE NAVIGATION (NAVBAR) --- */
+#main {
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
 }
 
+#main a {
+    text-decoration: none;
+    color: #4a5568;
+    font-weight: 600;
+    margin: 0 20px;
+    transition: color 0.3s;
+    position: relative;
+}
+
+#main a:hover { color: var(--primary); }
+
+#main a::after {
+    content: '';
+    position: absolute;
+    width: 0; height: 3px; bottom: -8px; left: 0;
+    background-color: var(--primary);
+    transition: width 0.3s;
+}
+
+#main a:hover::after { width: 100%; }
+
+/* --- 3. HEADER & STATUT --- */
 header {
     background: linear-gradient(135deg, #0062ff, #00c6ff);
     color: white;
-    padding: 40px 20px;
+    padding: 20px 20px;
     text-align: center;
-    margin-bottom: 30px;
 }
 
-/* Auth Cards */
-.auth-container {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    margin-bottom: 50px;
+.you { font-size: 1.1rem; margin-top: 10px; opacity: 0.9; }
+
+/* --- 4. SECTION OFFRES (MODIFIÉE POUR PETITES IMAGES) --- */
+.container-offers {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 20px;
 }
 
-.auth-card {
-    background: white;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-    width: 300px;
-}
-
-.auth-card input {
-    width: 90%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-}
-
-/* Grid Offres */
-.section-title { text-align: center; margin-bottom: 40px; font-size: 2rem; }
-
-.grid-offres {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 25px;
-    justify-content: center;
-}
+.grid-offres { display: flex; flex-direction: column; gap: 30px; }
 
 .carte-box {
-    background: white;
-    border-radius: 15px;
-    overflow: hidden;
-    width: 300px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease;
     display: flex;
-    flex-direction: column;
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    min-height: 250px; /* Moins haut qu'avant */
 }
 
-.carte-box:hover { transform: translateY(-10px); }
-
-.carte-box.featured {
-    border: 2px solid var(--primary);
-    transform: scale(1.05);
+.box-img-wrapper {
+    width: 45%; /* IMAGE PLUS PETITE EN LARGEUR */
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
 }
 
 .box-img {
     width: 100%;
-    height: 180px;
-    object-fit: cover;
+    height: 100%;
+    object-fit: contain; /* ON VOIT L'IMAGE EN ENTIER SANS COUPURE */
 }
 
-.box-content { padding: 20px; text-align: center; flex-grow: 1; }
+.box-content {
+    width: 70%;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
 
-.price { font-size: 1.5rem; font-weight: bold; color: var(--primary); margin: 10px 0; }
+.price { font-size: 2rem; font-weight: 800; color: var(--primary); margin: 5px 0; }
 .price span { font-size: 0.9rem; color: var(--secondary); }
 
-.desc { font-size: 0.9rem; color: #666; margin-bottom: 20px; }
+/* --- 5. SECTION ÉQUIPE (GRID) --- */
+.conteneur-equipe {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    padding: 40px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
 
-/* Buttons */
-button {
+.card {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s;
+}
+
+.card:hover { transform: translateY(-5px); }
+
+.card img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+    border: 3px solid var(--light);
+}
+
+/* --- 6. FORMULAIRES (CONTACT / CLIENT) --- */
+.container-form {
+    max-width: 600px;
+    margin: 40px auto;
+    background: white;
+    padding: 35px;
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+}
+
+form label { font-weight: 600; display: block; margin-bottom: 8px; color: #444; }
+
+input[type="text"], input[type="email"], input[type="password"], textarea, select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 2px solid #edf2f7;
+    border-radius: 10px;
+    box-sizing: border-box; /* Évite que l'input dépasse */
+}
+
+input:focus { border-color: var(--primary); outline: none; }
+
+/* --- 7. BOUTONS --- */
+button, .btn-buy, input[type="submit"] {
     cursor: pointer;
     border: none;
     border-radius: 8px;
     font-weight: 600;
-    transition: 0.3s;
-    width: 100%;
-    padding: 12px;
-}
-
-.btn-primary { background: var(--primary); color: white; }
-.btn-secondary { background: #eee; color: var(--dark); }
-.btn-buy { background: var(--success); color: white; }
-
-button:hover { opacity: 0.8; }
-
-.btn-logout {
-    display: inline-block;
-    padding: 8px 15px;
-    background-color: #ff4d4d;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    font-size: 0.9rem;
-    margin-top: 10px;
+    padding: 12px 25px;
     transition: 0.3s;
 }
 
-.btn-logout:hover {
-    background-color: #cc0000;
-}
+.btn-primary, input[type="submit"] { background: var(--primary); color: white; }
+.btn-secondary, input[type="submit"] { background: var(--primary); color: white; }
+.btn-buy { background: var(--success); color: white; width: fit-content; }
+.btn-logout { background: #ff4d4d; color: white; text-decoration: none; padding: 8px 15px; border-radius: 5px; font-size: 0.9rem; }
 
-.you {
-    font-size: 1.5rem;
-    color: rgba(255, 255, 255, 0.896);
-}
-
-/* --- DESIGN DU FORMULAIRE FOURNISSEUR --- */
-
-.container {
-    max-width: 600px; /* On réduit la largeur pour que ce soit plus lisible */
-    margin: 40px auto;
-    background: #ffffff;
-    padding: 40px;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-}
-
-form {
-    display: flex;
-    flex-direction: column;
-}
-
-/* Style des labels */
-label {
-    font-weight: 600;
-    margin-bottom: 8px;
-    color: #444;
-    font-size: 0.95rem;
-}
-
-/* Style commun aux inputs, select et textarea */
-input[type="text"],
-input[type="email"],
-select,
-textarea {
-    width: 100%;
-    padding: 12px 15px;
-    margin-bottom: 25px; /* Espace entre les champs */
-    border: 2px solid #edf2f7;
-    border-radius: 10px;
-    background-color: #f8fafc;
-    font-family: 'Poppins', sans-serif;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-    outline: none;
-}
-
-/* Effet au clic (focus) */
-input:focus,
-select:focus,
-textarea:focus {
-    border-color: #0062ff;
-    background-color: #fff;
-    box-shadow: 0 0 0 4px rgba(0, 98, 255, 0.1);
-}
-
-/* Style spécifique au select (Territoire) */
-select {
-    cursor: pointer;
-    appearance: none; /* Retire le style par défaut du navigateur */
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%234a5568' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 15px center;
-    background-size: 18px;
-}
-
-/* Style du Textarea */
-textarea {
-    resize: vertical; /* Permet d'agrandir seulement en hauteur */
-    min-height: 120px;
-}
-
-/* Style du bouton Enregistrer */
-input[type="submit"] {
-    background: linear-gradient(135deg, #0062ff, #00c6ff);
-    color: white;
-    padding: 15px;
-    border: none;
-    border-radius: 12px;
-    font-size: 1.1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
-    margin-top: 10px;
-}
-
-input[type="submit"]:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 98, 255, 0.3);
-}
-
-input[type="submit"]:active {
-    transform: translateY(0);
-}
-
-/* --- RESPONSIVE --- */
-@media (max-width: 600px) {
-    .container {
-        margin: 20px;
-        padding: 25px;
-    }
-}
-
-/* --- SECTION ÉQUIPE --- */
-
-.conteneur-equipe {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
-    padding: 40px 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-/* Style de la Carte */
-.card {
-    background: #ffffff;
-    border-radius: 20px;
-    padding: 30px 20px;
-    text-align: center;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-    transition: all 0.3s ease;
-    border: 1px solid #f0f0f0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 35px rgba(0, 98, 255, 0.15);
-    border-color: #0062ff;
-}
-
-/* Style de la Photo (Avatar circulaire) */
-.card img {
-    width: 120px !important; /* On force la taille */
-    height: 120px !important;
-    object-fit: cover; /* Pour ne pas déformer l'image */
-    border-radius: 50%; /* Image bien ronde */
-    border: 4px solid #f8fafc;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    margin-bottom: 20px;
-    transition: border-color 0.3s;
-}
-
-.card:hover img {
-    border-color: #0062ff;
-}
-
-/* Typographie */
-.card h4 {
-    margin: 10px 0 5px 0;
-    font-size: 1.25rem;
-    color: #2d3748;
-    text-transform: capitalize;
-}
-
-.card p i {
-    color: #0062ff;
-    font-weight: 600;
-    font-size: 0.9rem;
-    display: block;
-    margin-bottom: 15px;
-}
-
-/* Infos de contact */
-.infos-contact {
-    font-size: 0.85rem;
-    color: #718096;
-    line-height: 1.6;
-    border-top: 1px solid #edf2f7;
-    padding-top: 15px;
-    width: 100%;
-}
-
-/* Numéro d'immatriculation (plus discret) */
-.infos-admin {
-    font-size: 0.75rem;
-    color: #a0aec0;
-    margin-top: 10px;
-    background: #f8fafc;
-    padding: 4px 10px;
-    border-radius: 50px;
-    display: inline-block;
-}
-
-/* --- BARRE DE NAVIGATION --- */
-
-#main {
-    background-color: rgba(255, 255, 255, 0.95); /* Blanc légèrement transparent */
-    backdrop-filter: blur(10px); /* Effet de flou derrière (Glassmorphism) */
-    height: 70px;
-    display: flex;
-    justify-content: center; /* Centre les liens */
-    align-items: center;
-    position: sticky; /* Reste en haut au défilement */
-    top: 0;
-    z-index: 1000;
-    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
-    padding: 0 20px;
-}
-
-/* Style des liens */
-#main a {
-    text-decoration: none;
-    color: #4a5568; /* Gris foncé moderne */
-    font-weight: 600;
-    margin: 0 20px;
-    font-size: 1.05rem;
-    position: relative; /* Pour l'animation de la barre dessous */
-    transition: color 0.3s ease;
-}
-
-/* Effet au survol : la couleur change */
-#main a:hover {
-    color: #0062ff; /* Bleu MayBox */
-}
-
-/* Animation de la petite barre sous le lien au survol */
-#main a::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 3px;
-    bottom: -8px;
-    left: 0;
-    background-color: #0062ff;
-    transition: width 0.3s ease;
-    border-radius: 2px;
-}
-
-#main a:hover::after {
-    width: 100%; /* La barre s'allonge au survol */
-}
-
-/* Style pour le lien "Actif" (si tu ajoutes la classe 'active' en JS) */
-#main a.active {
-    color: #0062ff;
-}
-#main a.active::after {
-    width: 100%;
-}
-
-/* --- RESPONSIVE --- */
-@media (max-width: 600px) {
-    #main {
-        height: auto;
-        padding: 15px;
-    }
-    #main a {
-        margin: 0 10px;
-        font-size: 0.9rem;
-    }
+/* --- 8. RESPONSIVE --- */
+@media (max-width: 768px) {
+    .carte-box { flex-direction: column; }
+    .box-img-wrapper, .box-content { width: 100%; text-align: center; }
+    .box-img-wrapper { height: 150px; }
+    .btn-buy { width: 100%; }
 }
