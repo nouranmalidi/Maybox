@@ -60,38 +60,39 @@ header {
 
 /* --- 4. SECTION OFFRES --- */
 .container-offers {
-    max-width: 1000px;
+    max-width: 1000px; /* Limite la largeur du contenu pour une meilleure lisibilité */
     margin: 40px auto;
     padding: 0 20px;
 }
 
-.grid-offres { display: flex; flex-direction: column; gap: 30px; }
+.grid-offres { display: flex; flex-direction: column; gap: 30px; } /* Utilise Flexbox pour empiler les cartes 
+verticalement avec un espace de 30px entre elles */
 
 .carte-box {
-    display: flex;
+    display: flex; /* Utilise Flexbox pour aligner l'image et le contenu côte à côte */
     background: white;
     border-radius: 20px;
-    overflow: hidden;
+    overflow: hidden; /* Assure que les coins arrondis s'appliquent à l'image et au contenu */
     box-shadow: var(--shadow);
     min-height: 250px; /* Moins haut qu'avant */
 }
 
 .box-img-wrapper {
-    width: 45%; /* IMAGE PLUS PETITE EN LARGEUR */
+    width: 45%; /* Prend 45% de la largeur de la carte pour l'image */
     background-color: #fff;
-    display: flex;
+    display: flex; /* Utilise Flexbox pour centrer l'image à l'intérieur de son conteneur */
     align-items: center;
     justify-content: center;
     padding: 10px;
 }
 
-.box-img {
+.box-img { /* Assure que l'image remplit son conteneur sans être déformée */
     width: 100%;
     height: 100%;
     object-fit: contain; /* ON VOIT L'IMAGE EN ENTIER SANS COUPURE */
 }
 
-.box-content {
+.box-content { 
     width: 70%;
     padding: 30px;
     display: flex;
@@ -100,12 +101,15 @@ header {
 }
 
 .price { font-size: 2rem; font-weight: 800; color: var(--primary); margin: 5px 0; }
-.price span { font-size: 0.9rem; color: var(--secondary); }
+.price span { font-size: 0.9rem; color: var(--secondary); } /* Le "mois" en petit a côté du prix,c'est un 
+sélecteur descendant. */
 
 /* --- 5. SECTION ÉQUIPE (GRID) --- */
-.conteneur-equipe {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+.conteneur-equipe { /* Utilise CSS Grid pour créer une grille responsive de cartes d'équipe */
+    display: grid;  /*Contrairement a flexbox qui aligne sur une seule ligne, grid gère les lignes et colonnes */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Crée autant de colonnes que possible avec une 
+    largeur minimale de 250px et si il reste qund meme un espace il aggrandit toutes les cartes pour remplir 
+    l'espace disponible (1fr) */
     gap: 25px;
     padding: 40px;
     max-width: 1100px;
@@ -118,18 +122,23 @@ header {
     padding: 20px;
     text-align: center;
     box-shadow: var(--shadow);
-    transition: transform 0.3s;
+    transition: transform 0.3s; /* "Si la propriété 'transform' change, ne le fais pas instantanément.
+     Prends 0,3 seconde pour faire un mouvement fluide." */ 
 }
 
-.card:hover { transform: translateY(-5px); }
+/*:hover est une pseudo-classe. Elle s'active uniquement quand la souris de l'utilisateur survole l'élément.*/
+.card:hover { transform: translateY(-5px); } /*transform : C'est la propriété pour modifier la forme ou 
+la position d'un élément.
+translateY : On déplace l'élément sur l'axe Y (l'axe vertical, de haut en bas).
+-5px fait monter la carte de 5 pixels.*/
 
 .card img {
     width: 100px;
     height: 100px;
     border-radius: 50%;
-    object-fit: cover;
+    object-fit: cover; /* Assure que l'image remplit le cercle sans être déformée */
     margin-bottom: 15px;
-    border: 3px solid var(--light);
+    border: 3px solid var(--light); 
 }
 
 /* --- 6. FORMULAIRES (CONTACT / CLIENT) --- */
@@ -142,7 +151,8 @@ header {
     box-shadow: var(--shadow);
 }
 
-form label { font-weight: 600; display: block; margin-bottom: 8px; color: #444; }
+form label { font-weight: 600; display: block; margin-bottom: 8px; color: #444; } /* display: block; 
+fait que le label prend toute la largeur disponible, ce qui permet de mieux gérer les marges et les espacements. */
 
 input[type="text"], input[type="email"], input[type="password"], textarea, select {
     width: 100%;
@@ -150,10 +160,13 @@ input[type="text"], input[type="email"], input[type="password"], textarea, selec
     margin-bottom: 20px;
     border: 2px solid #edf2f7;
     border-radius: 10px;
-    box-sizing: border-box; /* Évite que l'input dépasse */
+    box-sizing: border-box; /* Évite que l'input dépasse car il inclut le padding et
+     la bordure dans la largeur totale de la boîte */
 }
 
-input:focus { border-color: var(--primary); outline: none; }
+input:focus { border-color: var(--primary); outline: none; } /* Lorsque l'utilisateur clique 
+sur un champ de formulaire, la bordure change de couleur pour indiquer que le champ est actif.
+outline: none; retire le contour bleu par défaut*/
 
 /* --- 7. BOUTONS --- */
 button, .btn-buy, input[type="submit"] {

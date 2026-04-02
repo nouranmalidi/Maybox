@@ -63,3 +63,9 @@ ALTER TABLE equipe ADD COLUMN photo VARCHAR(255);
 UPDATE equipe SET prenom = 'Pouloulou' WHERE id = 2;
 
 
+INSERT INTO equipe (nom, prenom, fonction, numero_immatriculation, telephone, email, photo) VALUES
+('Djanfar', 'Jordan', 'Directeur Général', '123437789', '0128466789', 'jordan.djanfar@maybox.fr', 'jprdan.webp'),
+('Malidi Mlimi', 'Nouran', 'PDG', '987574321', '0639874562', 'nouran.malidi@maybox.fr', 'you.png');
+
+
+UPDATE equipe SET photo = 'jordan.webp' WHERE id = 7;
