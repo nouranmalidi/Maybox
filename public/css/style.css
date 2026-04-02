@@ -170,22 +170,23 @@ outline: none; retire le contour bleu par défaut*/
 
 /* --- 7. BOUTONS --- */
 button, .btn-buy, input[type="submit"] {
-    cursor: pointer;
+    cursor: pointer; /* Change le curseur en une main pour indiquer que c'est cliquable */
     border: none;
     border-radius: 8px;
     font-weight: 600;
     padding: 12px 25px;
-    transition: 0.3s;
 }
 
 .btn-primary, input[type="submit"] { background: var(--primary); color: white; }
 .btn-secondary, input[type="submit"] { background: var(--primary); color: white; }
-.btn-buy { background: var(--success); color: white; width: fit-content; }
+.btn-buy { background: var(--success); color: white; width: fit-content; } /* width: 
+fit-content; fait que le bouton prend seulement la largeur nécessaire pour son contenu, 
+au lieu de s'étendre sur toute la largeur disponible. */
 .btn-logout { background: #ff4d4d; color: white; text-decoration: none; padding: 8px 15px; border-radius: 5px; font-size: 0.9rem; }
 
 /* --- 8. RESPONSIVE --- */
-@media (max-width: 768px) {
-    .carte-box { flex-direction: column; }
+@media (max-width: 768px) { /* Lorsque la largeur de l'écran est inférieure ou égale à 768px (tablettes et mobiles) */
+    .carte-box { flex-direction: column; } /* Les cartes s'empilent verticalement au lieu d'être côte à côte */
     .box-img-wrapper, .box-content { width: 100%; text-align: center; }
     .box-img-wrapper { height: 150px; }
     .btn-buy { width: 100%; }

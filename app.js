@@ -21,7 +21,7 @@ const session = require('express-session');
 const app = express();
 
 
-app.use(session({
+app.use(session({ // Configuration de la session
   secret: 'ma_cle_secrete_super_secure', 
   resave: false,
   saveUninitialized: true,
@@ -59,7 +59,7 @@ app.set('view engine', 'ejs');
 // Je précise que j'utilise le dossier 'public' qui contient les fichiers statics
 app.use(express.static('public'));
 
-
+// API ROUTE pour la page d'accueil
 app.get('/api/accueil', (req, res) => {
   // On passe le nom du client à la vue (s'il existe)
   res.render("accueil", { 
@@ -110,7 +110,7 @@ app.post('/api/client', (req, res) => {
   }); // Fin de bcrypt.hash
 });
 
-
+// Route de connexion : vérifie les identifiants et crée une sessions
 app.post('/api/login', (req, res) => {
   const { email, password } = req.body;
 
@@ -120,11 +120,13 @@ app.post('/api/login', (req, res) => {
     // 1. On cherche l'utilisateur par son email
     connection.query('SELECT * FROM client WHERE email = ?', [email], (errSQL, resultats) => {
       
-      if (errSQL || resultats.length === 0) {
+      if (errSQL || resultats.length === 0) { // Si il y a une erreur SQL ou si 
+      // aucun utilisateur n'est trouvé
         return res.send("Utilisateur non trouvé ou erreur.");
       }
 
-      const utilisateur = resultats[0];
+      const utilisateur = resultats[0]; // On prend le premier résultat (il devrait n'y en 
+      // avoir qu'un grâce à la contrainte d'unicité sur l'email)
 
       // 2. On compare le mot de passe tapé avec le HASH de la BDD
       bcrypt.compare(password, utilisateur.mot_de_passe, (errBcrypt, match) => {
@@ -175,12 +177,12 @@ app.post('/api/souscrire', (req, res) => {
       
       // 4. RÉPONSE AU CLIENT
       res.send(`Félicitations ${req.session.clientNom} ! Votre souscription est validée pour la box  ${id_box}.`);
-      // En vrai, tu ferais plutôt un res.redirect() vers une page "Mon Compte"
     });
   });
 });
 
 
+// Route de déconnexion : détruit la session
 app.get('/api/logout', (req, res) => {
   req.session.destroy((err) => {
     if (err) {
